@@ -27,4 +27,4 @@ node/
 node_modules/
 package-lock.json
 webpack.generated.js
-/frontend/src/generated/
+/front/src/generated/
