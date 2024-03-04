@@ -1,6 +1,7 @@
-import { Link, Outlet } from 'react-router-dom'
+import { NavLink, Outlet } from 'react-router-dom'
 import styles from './Layout.module.css'
 import Button from '../../components/Button/Button'
+import classNames from 'classnames'
 
 const Layout = () => {
   return <div className={styles.layout}>
@@ -20,14 +21,22 @@ const Layout = () => {
       </div>
 
       <div className={styles.menu}>
-        <Link to={'/'} className={styles.link}>
+        <NavLink to={'/'}
+                 className={({ isActive }) => classNames(styles.link, {
+                   [styles.active]: isActive
+                 })}
+        >
           <img src={'/menu-icon.svg'} alt={'menu icon'}/>
           Menu
-        </Link>
-        <Link to={'/cart'} className={styles.link}>
+        </NavLink>
+        <NavLink to={'/cart'}
+                 className={({ isActive }) => classNames(styles.link, {
+                   [styles.active]: isActive
+                 })}
+        >
           <img src={'/cart-icon.svg'} alt={'cart icon'}/>
           Cart
-        </Link>
+        </NavLink>
       </div>
 
       <Button className={styles.exit}>
@@ -36,7 +45,7 @@ const Layout = () => {
       </Button>
     </div>
 
-    <div>
+    <div className={styles.content}>
       <Outlet/>
     </div>
 
