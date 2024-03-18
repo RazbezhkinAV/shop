@@ -2,21 +2,28 @@ import Headling from '../../components/Headling/Headling'
 import Search from '../../components/Search/Search'
 import classNames from 'classnames'
 import styles from './Menu.module.css'
-import ProductCard from '../../components/ProductCard/ProductCard'
-import type { Product } from '../../interfaces/product.interface'
+import type { ProductEntity } from '../../interfaces/product.interface'
 import { useEffect, useState } from 'react'
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 import { PREFIX } from '../../helpers/API'
+import MenuList from './MenuList/MenuList'
 
 const Menu = () => {
-  const [products, setProducts] = useState<Product[]>([])
-
+  const [products, setProducts] = useState<ProductEntity[]>([])
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [error, setError] = useState<string | undefined>()
   const getMenu = async () => {
     try {
-      const { data } = await axios.get<Product[]>(`${PREFIX}/products`)
+      setIsLoading(true)
+      const { data } = await axios.get<ProductEntity[]>(`${PREFIX}/products`)
       setProducts(data)
+      setIsLoading(false)
     } catch (e) {
-      console.log(e)
+      console.error(e)
+      if (e instanceof AxiosError) {
+        setError(e.message)
+      }
+      setIsLoading(false)
     }
   }
 
@@ -31,15 +38,13 @@ const Menu = () => {
     </div>
     <div>
       {
-        products.map(p => {
-          return <ProductCard key={p.id}
-                              id={p.id}
-                              name={p.name}
-                              description={p.ingredients.join(', ')}
-                              image={p.image}
-                              price={p.price}
-                              rating={p.rating}/>
-        })
+        error != null && <>{error}</>
+      }
+      {
+        !isLoading && <MenuList products={products}/>
+      }
+      {
+        isLoading && 'Loading Products...'
       }
     </div>
   </>

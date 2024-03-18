@@ -2,6 +2,7 @@ package com.razbezhkin.shop.service;
 
 import com.razbezhkin.shop.common.mapper.EntityMapper;
 import com.razbezhkin.shop.domain.Product;
+import com.razbezhkin.shop.exception.NotFoundException;
 import com.razbezhkin.shop.repository.product.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,5 +20,11 @@ public class ProductService {
         return productRepository.findAll().stream()
             .map(entityMapper::toProduct)
             .collect(Collectors.toList());
+    }
+
+    public Product getById(Integer id) {
+        return productRepository.findById(id)
+            .map(entityMapper::toProduct)
+            .orElseThrow(() -> new NotFoundException("Product", id));
     }
 }

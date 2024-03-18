@@ -3,6 +3,7 @@ package com.razbezhkin.shop.repository.product;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class ProductRepositoryImpl implements ProductRepository {
@@ -41,5 +42,12 @@ public class ProductRepositoryImpl implements ProductRepository {
     @Override
     public List<ProductEntity> findAll() {
         return CASHE;
+    }
+
+    @Override
+    public Optional<ProductEntity> findById(Integer id) {
+        return CASHE.stream()
+            .filter(it -> it.getId().equals(id))
+            .findFirst();
     }
 }
