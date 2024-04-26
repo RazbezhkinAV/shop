@@ -1,7 +1,7 @@
-package com.razbezhkin.shop.controller;
+package com.razbezhkin.shop.controller.product;
 
 import com.razbezhkin.shop.common.mapper.DtoMapper;
-import com.razbezhkin.shop.service.ProductService;
+import com.razbezhkin.shop.service.product.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

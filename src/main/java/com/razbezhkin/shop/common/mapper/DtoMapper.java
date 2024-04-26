@@ -1,7 +1,7 @@
 package com.razbezhkin.shop.common.mapper;
 
-import com.razbezhkin.shop.controller.ProductDto;
-import com.razbezhkin.shop.domain.Product;
+import com.razbezhkin.shop.controller.product.ProductDto;
+import com.razbezhkin.shop.domain.product.Product;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 

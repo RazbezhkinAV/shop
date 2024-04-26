@@ -8,7 +8,7 @@ import java.util.Optional;
 @Repository
 public class ProductRepositoryImpl implements ProductRepository {
 
-    private final List<ProductEntity> CASHE = List.of(
+    private final List<ProductEntity> CASH = List.of(
         ProductEntity.builder()
             .id(1)
             .name("Питса")
@@ -41,12 +41,12 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     @Override
     public List<ProductEntity> findAll() {
-        return CASHE;
+        return CASH;
     }
 
     @Override
     public Optional<ProductEntity> findById(Integer id) {
-        return CASHE.stream()
+        return CASH.stream()
             .filter(it -> it.getId().equals(id))
             .findFirst();
     }

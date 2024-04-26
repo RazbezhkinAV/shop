@@ -1,7 +1,7 @@
-package com.razbezhkin.shop.service;
+package com.razbezhkin.shop.service.product;
 
 import com.razbezhkin.shop.common.mapper.EntityMapper;
-import com.razbezhkin.shop.domain.Product;
+import com.razbezhkin.shop.domain.product.Product;
 import com.razbezhkin.shop.exception.NotFoundException;
 import com.razbezhkin.shop.repository.product.ProductRepository;
 import lombok.RequiredArgsConstructor;

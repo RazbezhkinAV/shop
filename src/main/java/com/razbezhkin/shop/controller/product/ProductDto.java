@@ -1,4 +1,4 @@
-package com.razbezhkin.shop.controller;
+package com.razbezhkin.shop.controller.product;
 
 import lombok.Builder;
 

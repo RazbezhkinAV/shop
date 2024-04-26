@@ -9,15 +9,16 @@
     font-weight: 400;
 }
 
-.small{
+.small {
     font-size: 29px;
     padding: 10px 25px;
 }
 
-.big{
+.big {
     font-size: 29px;
     text-transform: uppercase;
     padding: 20px 60px;
+    box-shadow: 0 10px 40px 0 rgba(122, 129, 190, 0.16);
 }
 
 .accent:hover {

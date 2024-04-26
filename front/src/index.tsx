@@ -8,6 +8,8 @@ import Layout from './layout/Layout/Layout'
 import Product from './components/Product/Product'
 import axios from 'axios'
 import { PREFIX } from './helpers/API'
+import AuthLayout from './layout/Auth/AuthLayout'
+import Login from './pages/Login/Login'
 
 const router = createBrowserRouter([
   {
@@ -31,6 +33,24 @@ const router = createBrowserRouter([
             data: axios.get(`${PREFIX}/products/${params?.id ?? ''}`)
           })
         }
+      }
+    ]
+  },
+  {
+    path: '*',
+    element: <>Invalid Path</>
+  },
+  {
+    path: '/auth',
+    element: <AuthLayout/>,
+    children: [
+      {
+        path: 'login',
+        element: <Login/>
+      },
+      {
+        path: 'register',
+        element: <>Register</>
       }
     ]
   }

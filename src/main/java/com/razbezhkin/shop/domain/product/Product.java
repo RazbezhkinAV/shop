@@ -1,4 +1,4 @@
-package com.razbezhkin.shop.domain;
+package com.razbezhkin.shop.domain.product;
 
 import lombok.Builder;
 import lombok.Getter;
