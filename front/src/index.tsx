@@ -11,6 +11,9 @@ import { PREFIX } from './helpers/API'
 import AuthLayout from './layout/Auth/AuthLayout'
 import Login from './pages/Login/Login'
 import RequireAuth from './helpers/RequireAuth'
+import { Provider } from 'react-redux'
+import { store } from './store/store'
+import Register from './pages/Register/Register'
 
 const router = createBrowserRouter([
   {
@@ -51,7 +54,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'register',
-        element: <>Register</>
+        element: <Register/>
       }
     ]
   }
@@ -62,6 +65,8 @@ const root = ReactDOM.createRoot(
 )
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router}/>
+    <Provider store={store}>
+      <RouterProvider router={router}/>
+    </Provider>
   </React.StrictMode>
 )

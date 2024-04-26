@@ -8,6 +8,9 @@ import axios, { AxiosError } from 'axios'
 import Where from '../../components/Where/Where'
 import { PREFIX } from '../../helpers/API'
 import { type LoginResponse } from '../../interfaces/auth.interface'
+import { useDispatch } from 'react-redux'
+import { type AppDispatch } from '../../store/store'
+import { userActions } from '../../store/userSlice'
 
 export interface LoginForm {
   email: {
@@ -21,6 +24,7 @@ export interface LoginForm {
 const Login = () => {
   const [error, setError] = useState<string | null>(null)
   const navigate = useNavigate()
+  const dispatch = useDispatch<AppDispatch>()
 
   const submit = async (e: FormEvent) => {
     e.preventDefault()
@@ -39,8 +43,8 @@ const Login = () => {
         email,
         password
       })
+      dispatch(userActions.addJwt(data.token))
       navigate('/')
-      console.log(data)
     } catch (e) {
       if (e instanceof AxiosError) {
         setError(e.response?.data.message)
