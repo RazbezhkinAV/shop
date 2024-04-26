@@ -3,10 +3,11 @@ import Headling from '../../components/Headling/Headling'
 import Input from '../../components/Input/Input'
 import { type FormEvent, useState } from 'react'
 import Button from '../../components/Button/Button'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import axios, { AxiosError } from 'axios'
 import Where from '../../components/Where/Where'
 import { PREFIX } from '../../helpers/API'
+import { type LoginResponse } from '../../interfaces/auth.interface'
 
 export interface LoginForm {
   email: {
@@ -19,6 +20,8 @@ export interface LoginForm {
 
 const Login = () => {
   const [error, setError] = useState<string | null>(null)
+  const navigate = useNavigate()
+
   const submit = async (e: FormEvent) => {
     e.preventDefault()
     setError(null)
@@ -32,10 +35,11 @@ const Login = () => {
 
   const sendLogin = async (email: string, password: string) => {
     try {
-      const { data } = await axios.post(`${PREFIX}/auth/login`, {
+      const { data } = await axios.post<LoginResponse>(`${PREFIX}/auth/login`, {
         email,
         password
       })
+      navigate('/')
       console.log(data)
     } catch (e) {
       if (e instanceof AxiosError) {

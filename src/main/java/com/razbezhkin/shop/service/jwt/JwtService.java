@@ -22,7 +22,7 @@ public class JwtService {
      * @param token токен
      * @return имя пользователя
      */
-    public String extractUserName(String token) {
+    public static String extractUserName(String token) {
         return extractClaim(token, Claims::getSubject);
     }
 
@@ -41,10 +41,10 @@ public class JwtService {
     /**
      * Проверка токена на валидность
      *
-     * @param token       токен
+     * @param token токен
      * @return true, если токен валиден
      */
-    public boolean isTokenValid(String token, User user) {
+    public static boolean isTokenValid(String token, User user) {
         final String userName = extractUserName(token);
         return (userName.equals(user.getLogin())) && !isTokenExpired(token);
     }
@@ -57,7 +57,7 @@ public class JwtService {
      * @param <T>             тип данных
      * @return данные
      */
-    private <T> T extractClaim(String token, Function<Claims, T> claimsResolvers) {
+    private static <T> T extractClaim(String token, Function<Claims, T> claimsResolvers) {
         final Claims claims = extractAllClaims(token);
         return claimsResolvers.apply(claims);
     }
@@ -84,7 +84,7 @@ public class JwtService {
      * @param token токен
      * @return true, если токен просрочен
      */
-    private boolean isTokenExpired(String token) {
+    private static boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
     }
 
@@ -94,7 +94,7 @@ public class JwtService {
      * @param token токен
      * @return дата истечения
      */
-    private Date extractExpiration(String token) {
+    private static Date extractExpiration(String token) {
         return extractClaim(token, Claims::getExpiration);
     }
 
@@ -104,7 +104,7 @@ public class JwtService {
      * @param token токен
      * @return данные
      */
-    private Claims extractAllClaims(String token) {
+    private static Claims extractAllClaims(String token) {
         return Jwts.parser().setSigningKey(getSigningKey()).build().parseClaimsJws(token)
             .getBody();
     }

@@ -17,8 +17,8 @@ public class UserRepositoryImpl implements UserRepository {
         CASH.add(
             UserEntity.builder()
                 .login("admin")
-                .email("admin")
-                .password("admin")
+                .email("admin.com")
+                .password("123")
                 .build()
         );
     }

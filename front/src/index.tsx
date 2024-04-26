@@ -10,11 +10,12 @@ import axios from 'axios'
 import { PREFIX } from './helpers/API'
 import AuthLayout from './layout/Auth/AuthLayout'
 import Login from './pages/Login/Login'
+import RequireAuth from './helpers/RequireAuth'
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Layout/>,
+    element: <RequireAuth><Layout/></RequireAuth>,
     children: [
       {
         path: '/',
